@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>CSS Transition</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: coral;
+        transition:
+          transform 1s cubic-bezier(0, 0.8, 0.92, 0.36),
+          background 2s 1s linear;
+        
+      }
+      
+      .box-action {
+        transform: translateX(300px);
+        background: blue;
+      }
+      
+      /*.box:hover {*/
+      /*  transform: scale(2);*/
+      /*}*/
+      
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    
+    <script type="application/javascript">
+      const box = document.querySelector('.box');
+      box.addEventListener('click', () => {
+        box.classList.toggle('box-action')
+      });
+    </script>
+  </body>
+</html>

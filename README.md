@@ -27,3 +27,16 @@ inflearn에서 다음 강의를 보고 정리한 저장소이다.
 
 `transitioncancel` 이벤트는 중간에 취소됐을 때 발생되는 이벤트인데,  
 대표적으로 `transition`이 지정된 객체가 사라졌을 때(대상 자체가 없어졌을 때), 취소가 된다.
+
+### SVG File Animation
+SVG 파일에 애니메이션을 적용할 때는 `img` 태그를 사용하면 안 된다.
+SVG 파일안의 `svg` 태그를 넣어도 되지만 소스코드가 너무 길어지므로, `object` 태그를 사용하는 것이 좋다. 
+`object` 태그를 사용하면, 요소 하나 하나를 객체로 인식하고 스크립트로 조절할 수 있다. 
+
+SVG 파일 안에 HTML처럼 `script`도 작성할 수 있는데, `img`태그를 사용하면 단순 이미지로 취급되끼 떄문에 적용이 안 되고,  
+`object` 태그로 선언했을 경우에는 `script`가 적용된다.
+
+일반적인 HTML 태그의 `transition` 동작은 해당 요소의 중앙을 기준으로 동작하지만,  
+SVG 파일의 `transition` 동작은 해당 요소의 좌측 상단을 기준으로 동작한다. 그래서, `transform-origin`을 사용해서 중앙을 기준으로 동작하게 할 수 있다.
+이렇게 해야 타겟팅된 요소를 중심으로 동작하게 된다.
+- `/section1-transition/02/images/key.svg - .key-blade 클래스 참조 - .key-btn.cls-1의 cx, cy를 기준으로 잡음.`

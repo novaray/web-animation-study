@@ -40,3 +40,28 @@ SVG 파일 안에 HTML처럼 `script`도 작성할 수 있는데, `img`태그를
 SVG 파일의 `transition` 동작은 해당 요소의 좌측 상단을 기준으로 동작한다. 그래서, `transform-origin`을 사용해서 중앙을 기준으로 동작하게 할 수 있다.
 이렇게 해야 타겟팅된 요소를 중심으로 동작하게 된다.
 - `/section1-transition/02/images/key.svg - .key-blade 클래스 참조 - .key-btn.cls-1의 cx, cy를 기준으로 잡음.`
+
+### CSS Animation
+`transition`과 세트라는 느낌으로 보면 된다.  
+`Web Animation API`라는 것은 `CSS Animation`을 자바스크립트로 컨트롤 할 수 있는 확장된 스펙이라고 보면 된다.
+
+`transition`과 동일한 기능이 많이 있고,  
+추가된 기능으로 다음의 기능을 설정할 수 있다.
+- name
+- direction(normal, reverse, alternate, alternate reverse)
+- iteration-count(반복 횟수)
+- play-state(running, paused)
+- fill-mode(forwards, backwards, both) - 애니메이션의 시작점하고 종료점에 지정된 스타일을 종료되었을 때 어떤 걸로 지정할 것인지를 정함.
+
+계략적인 흐름은 다음과 같이 설정할 수 있다.
+1. 어떤 요소를 어디에 그릴지 계산의 과정(calculate, recalculate).
+2. 레이아웃 구성
+   1. 레이어 - transform, opacity(성능이 좋다.).
+   2. 레이어 아닌 것들 - top, left, width, border, background, ...(움직일 때 계산을 계속 해줘야한다).
+      1. top, left값들은 굳이 건드리지 말고 `translate`함수를 쓰면 된다.
+3. 페인트 과정
+4. CSS 애니메이션 구동
+   1. 레이어는 성능이 좋음
+   2. 레이어가 아닌 것들은 움직이려면 재계산해야되기 때문에 성능이 좀 떨어진다. 
+
+성능이 떨어지더라도 극단적으로 쓰지말자가 아니라 알아서 결정한다.

@@ -65,3 +65,20 @@ SVG 파일의 `transition` 동작은 해당 요소의 좌측 상단을 기준으
    2. 레이어가 아닌 것들은 움직이려면 재계산해야되기 때문에 성능이 좀 떨어진다. 
 
 성능이 떨어지더라도 극단적으로 쓰지말자가 아니라 알아서 결정한다.
+
+### Web Animation API
+`CSS Animation`을 자바스크립트로 제어할 수 있게 만들어진 스펙(웹 표준)이다.
+
+기존의 자바스크립트 애니메이션은 `setInterval`, `window.requestAnimationFrame`같은 것을 이용해 CPU tick을 반복해 값을 바꿔서 애니메이션을 만들었었는데,  
+`Web Animation API`은 `CSS Animation`을 기반으로 만들어진 것이기 때문에 메인 스레드를 점유 안하고 GPU를 쓸 수 있다. 그래서 성능이 좋다.
+
+`CSS Animation`과 똑같은 options들을 가지지만, 이름이 바뀐 것들이 있다.
+- easing - timing function = 애니메이션 재생 속도 조절(linear, ...).
+- iterations - iteration-count = 반복 횟수
+- fill - fill-mode = 재생된 후에 그대로 멈춰있을 건지 처음으로 돌아갈 건지.
+
+`element.animate()`함수의 리턴 값은 Animation 객체다.  
+`CSS Animation`에서는 %로 `key frame`을 조절했다면 `Web Animation API`에서는 `offset` 프로퍼티로 조절이 가능하다.
+
+`CSS Animation`같은 경우는 자바스크립트에서 `transtionend` 이벤트나 `animationend` 이벤트를 바인딩해서 이벤트 리스너 함수에서 처리를 했어야 했는데,  
+`Web Animation API`는 `Promise`로 제공해준다.

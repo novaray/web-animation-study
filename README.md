@@ -82,3 +82,20 @@ SVG 파일의 `transition` 동작은 해당 요소의 좌측 상단을 기준으
 
 `CSS Animation`같은 경우는 자바스크립트에서 `transtionend` 이벤트나 `animationend` 이벤트를 바인딩해서 이벤트 리스너 함수에서 처리를 했어야 했는데,  
 `Web Animation API`는 `Promise`로 제공해준다.
+
+#### Group Effect
+`GroupEffect`는 아직 정식 출시가 안 되었기에 외부 스크립트를 가져와야 한다. 현재는 Lv2 단계이다.  
+다음의 cdn.js 홈페이지에서 검색 후 다운받았다.
+- https://cdnjs.com/libraries/web-animations
+- https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Web_Animations_API_Concepts#animation_effect
+
+애니메이션 생성자(`new Animation`)를 호출할 때 `KeyframeEffect`객체를 넣어줬던 것처럼,  
+`KeyframeEffect`객체를 여러개 생성 후, `GroupEffect` 생성자에 파라미터로 넣으면 된다.  
+`GroupEffect`객체를 만든 후, 실행 방법은 `document`의 `timeline` 프로퍼티의 `play`메서드를 호출하면된다.  
+`play`메서드의 파라미터에 `GroupEffect`객체를 넣으면 된다.
+
+#### Sequence Effect
+`SequenceEffect`는 아직 정식 출시가 안 되었기에 외부 스크립트를 가져와야 한다. 현재는 Lv2 단계이다.  
+해당 스펙도 아직 출시가 안 되었기에 위 `GroupEffect`처럼 외부 스크립트를 적용하면 된다(같은 파일이다).
+
+해당 기능은 애니메이션을 순차적으로 실행한다는 뜻이다(하나가 끝나면 그 다음것이 이어서 실행).

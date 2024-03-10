@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Starfield</title>
+	<style>
+		body {
+			overflow: hidden;
+			background-color: black;
+			/*background-color: gold;*/
+		}
+
+		.star {
+			position: absolute;
+			width: 3px;
+			height: 3px;
+			font-size: 0;
+			border-radius: 50%; /* 동그랗게 처리 */
+			background: white;
+			/*background: black;*/
+		}
+    
+    .star:nth-child(20n) {
+      width: 50px;
+      height: 50px;
+      background: url('./ilbuni-yoga.png') no-repeat 0 0 / cover;
+    }
+	</style>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.2/web-animations-next.min.js"></script>
+
+	<script type="module">
+    import Star from './star.js';
+    
+    const numberOfStars = 200;
+    const canvasWidth = window.innerWidth;
+    const canvasHeight = window.innerHeight;
+    const zModifier = canvasWidth;
+    const effects = [];
+    
+    let x, y, z;
+    let scale;
+    let pointFrom, pointTo, star;
+    let keyframes, options;
+    
+    const set3DPoint = (x, y, z) => {
+      const scale = zModifier / (zModifier + z);
+      const x2D = x * scale + (canvasWidth * 0.5);  // 가운데를 0으로 잡았으니 뺀 만큼 더해주면됨.
+      const y2D = y * scale + (canvasHeight * 0.5); // 가운데를 0으로 잡았으니 뺀 만큼 더해주면됨.
+      return [x2D, y2D, scale];
+    };
+    
+    for (let i = 0; i < numberOfStars; i++) {
+      x = Math.random() * canvasWidth - (canvasWidth * 0.5);    // 가운데를 0으로 잡고 그 기준으로 나뉘게끔.
+      y = Math.random() * canvasHeight - (canvasHeight * 0.5);  // 가운데를 0으로 잡고 그 기준으로 나뉘게끔.
+      z = Math.random() * zModifier;
+      
+      scale = zModifier / (zModifier + z);
+      pointFrom = set3DPoint(x, y, z);
+      pointTo = set3DPoint(x, y, z - zModifier);
+      console.log(scale, x, pointFrom[0], pointTo[0]);
+      
+      star = new Star(i);
+      
+      keyframes = [
+        {
+          transform: `translate(${pointFrom[0]}px, ${pointFrom[1]}px) scale(${pointFrom[2]})`
+        },
+        {
+          transform: `translate(${pointTo[0]}px, ${pointTo[1]}px) scale(${pointTo[2]})`
+        }
+      ];
+      
+      options = {
+        duration: 1000 / scale,
+        iterations: Infinity,
+        fill: 'both',
+        easing: 'linear'
+      };
+      
+      effects.push(new KeyframeEffect(star.element, keyframes, options));
+    }
+    const groupEffect = new GroupEffect(effects);
+    const animation = document.timeline.play(groupEffect);
+    
+    window.addEventListener('click', () => {
+      if (animation.playState === 'paused') {
+        animation.play();
+        return;
+      }
+      
+      animation.pause();
+    });
+	</script>
+</body>
+</html>

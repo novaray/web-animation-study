@@ -99,3 +99,14 @@ SVG 파일의 `transition` 동작은 해당 요소의 좌측 상단을 기준으
 해당 스펙도 아직 출시가 안 되었기에 위 `GroupEffect`처럼 외부 스크립트를 적용하면 된다(같은 파일이다).
 
 해당 기능은 애니메이션을 순차적으로 실행한다는 뜻이다(하나가 끝나면 그 다음것이 이어서 실행).
+
+### Scroll Timeline
+2024년 3월 12일 기준으로 아직 대다수의 브라우저는 실험적 기능이다. 특히 사파리는 지원 자체를 안 한다.  
+실제로 해당 폴리필을 안 받고 크롬에서 실행결과 정상 작동은 되는 걸 확인. 근데, 폴리필이랑 동작이 이상하게 되서 폴리필을 사용하는 게 낫다고 판단했다.
+- ex) `section6-waapi-scroll/01-basic/main.js`에서 `scroll-box`를 기준으로 스크롤 타임라인을 적용할 때 동작방식이 다르다.
+- ex) `threshold`값에 따른 동작 방싱이 다르다.
+- https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-timeline#browser_compatibility
+
+그래서, 폴리필을 제공해주는데 해당 폴리필도 Web Animation 스펙을 맞춘 코드로 작성이 되서 부담은 크게 없다.
+- https://github.com/flackr/scroll-timeline
+

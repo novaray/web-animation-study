@@ -110,3 +110,11 @@ SVG 파일의 `transition` 동작은 해당 요소의 좌측 상단을 기준으
 그래서, 폴리필을 제공해주는데 해당 폴리필도 Web Animation 스펙을 맞춘 코드로 작성이 되서 부담은 크게 없다.
 - https://github.com/flackr/scroll-timeline
 
+### CSS Contain
+가로 스크롤이 생길 때 `overflow-x: hidden`으로 스크롤을 가릴 수 있지만,  
+페이지 자체에 `position: sticky`인 요소가 있다면 제대로 동작을 하지 않는다.
+
+그래서 새로 추가된 속성인 `contain`을 쓰면, `sticky`더라도 동작을 하게 할 수 있다.  
+대표적으로 `paint`값을 주면 요소의 자손이 자신의 범위 바깥에 그려지지 않게 할 수 있다.  
+> https://developer.mozilla.org/ko/docs/Web/CSS/contain
+
